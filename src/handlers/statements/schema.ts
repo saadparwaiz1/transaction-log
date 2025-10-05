@@ -1,32 +1,26 @@
 import z from "zod";
 import type { ColDef, ICellRendererParams } from "ag-grid-community";
 import { DeleteButtonComponent } from "../../components/button";
-import { deleteRule } from "./api";
-import { TransactionCategory } from "../../schemas";
+import { deleteStatement } from "./api";
+import { TransactionType } from "../../schemas";
 
-export const Rule = z.object({
+export const Statement = z.object({
   id: z
     .string()
     .nullish()
     .transform((n) => n ?? crypto.randomUUID()),
-  regex: z.string(),
-  transactionCategory: TransactionCategory,
+  statementType: TransactionType,
 });
 
-export const Rules = z.array(Rule);
+export const Statements = z.array(Statement);
 
-export type Rule = z.infer<typeof Rule>;
-export type Rules = z.infer<typeof Rules>;
+export type Statement = z.infer<typeof Statement>;
+export type Statements = z.infer<typeof Statements>;
 
-export const RULE_COLUMN_DEFINITIONS: ColDef<Rule>[] = [
+export const STATEMENT_COLUMN_DEFINITIONS: ColDef<Statement>[] = [
   {
-    field: "regex",
-    headerName: "Regex",
-    flex: 1,
-  },
-  {
-    field: "transactionCategory",
-    headerName: "Transaction Category",
+    field: "statementType",
+    headerName: "Statement Type",
     flex: 1,
   },
   {
@@ -35,8 +29,9 @@ export const RULE_COLUMN_DEFINITIONS: ColDef<Rule>[] = [
     flex: 1,
     cellRenderer: DeleteButtonComponent,
     cellRendererParams: {
+      label: "Delete",
       onClick: (params: ICellRendererParams) => {
-        deleteRule(params.value);
+        deleteStatement(params.value);
         params.api.applyTransaction({
           remove: [{ id: params.value }],
         });

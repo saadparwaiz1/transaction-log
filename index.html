@@ -13,20 +13,10 @@
         <h2>Credit Card Statements</h2>
 
         <div id="credit-card-statements">
-          <label class="file-label">
-            <span>Amex Transactions</span>
-            <input id="amex" type="file" />
-          </label>
-
-          <label class="file-label">
-            <span>Barclays Transactions</span>
-            <input id="barclay" type="file" />
-          </label>
-
-          <label class="file-label">
-            <span>Lloyds Transactions</span>
-            <input id="lloyds" type="file" />
-          </label>
+          <div class="table-header">
+            <button id="add-statement" class="action-btn">Add Statement</button>
+          </div>
+          <div id="statements" class="table ag-theme-custom-dark"></div>
         </div>
       </div>
 
@@ -115,6 +105,27 @@
               <option value="Bill">Bill</option>
               <option value="Pet">Pet</option>
               <option value="Unknown">Unknown</option>
+            </select>
+
+            <div class="modal-actions">
+              <button type="submit" class="action-btn">Add</button>
+              <button type="button" class="action-btn close-btn">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div id="statement-model" class="modal hidden">
+        <div class="modal-content">
+          <h3>Add Statement</h3>
+          <form id="rules-form">
+            <label for="rec-type">Statement Type</label>
+            <select name="statementType" id="rec-type" required>
+              <option value="Amex">Amex</option>
+              <option value="Lloyds">Lloyds</option>
+              <option value="Barclays">Barclays</option>
+              <option value="Chase">Chase</option>
+              <option value="Current">Current</option>
             </select>
 
             <div class="modal-actions">

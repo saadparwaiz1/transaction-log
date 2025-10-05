@@ -1,8 +1,8 @@
 import z from "zod";
 import type { ColDef, ICellRendererParams } from "ag-grid-community";
-import { DeleteButtonComponent } from "../../components/button";
 import { deleteStatement } from "./api";
 import { TransactionType } from "../../schemas";
+import { UploadButtonComponent } from "./renderer";
 
 export const Statement = z.object({
   id: z
@@ -27,9 +27,8 @@ export const STATEMENT_COLUMN_DEFINITIONS: ColDef<Statement>[] = [
     field: "id",
     headerName: "Actions",
     flex: 1,
-    cellRenderer: DeleteButtonComponent,
+    cellRenderer: UploadButtonComponent,
     cellRendererParams: {
-      label: "Delete",
       onClick: (params: ICellRendererParams) => {
         deleteStatement(params.value);
         params.api.applyTransaction({

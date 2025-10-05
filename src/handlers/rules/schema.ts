@@ -1,6 +1,6 @@
 import z from "zod";
 import type { ColDef, ICellRendererParams } from "ag-grid-community";
-import { DeleteButtonComponent } from "../../components/button";
+import { DefaultActionRendererComponent } from "../../components/renderer";
 import { deleteRule } from "./api";
 import { TransactionCategory } from "../../schemas";
 
@@ -33,9 +33,9 @@ export const RULE_COLUMN_DEFINITIONS: ColDef<Rule>[] = [
     field: "id",
     headerName: "Actions",
     flex: 1,
-    cellRenderer: DeleteButtonComponent,
+    cellRenderer: DefaultActionRendererComponent,
     cellRendererParams: {
-      onClick: (params: ICellRendererParams) => {
+      onDelete: (params: ICellRendererParams) => {
         deleteRule(params.value);
         params.api.applyTransaction({
           remove: [{ id: params.value }],

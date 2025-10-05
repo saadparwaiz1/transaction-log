@@ -1,7 +1,7 @@
 import z from "zod";
 import { TransactionType } from "../../schemas";
 import type { ColDef, ICellRendererParams } from "ag-grid-community";
-import { DeleteButtonComponent } from "../../components/button";
+import { DefaultActionRendererComponent } from "../../components/renderer";
 import { deleteRecurring } from "./api";
 
 export const Recurring = z.object({
@@ -46,9 +46,9 @@ export const STATEMENT_COLUMN_DEFINITIONS: ColDef<Recurring>[] = [
     field: "id",
     headerName: "Actions",
     flex: 1,
-    cellRenderer: DeleteButtonComponent,
+    cellRenderer: DefaultActionRendererComponent,
     cellRendererParams: {
-      onClick: (params: ICellRendererParams) => {
+      onDelete: (params: ICellRendererParams) => {
         deleteRecurring(params.value);
         params.api.applyTransaction({
           remove: [{ id: params.value }],

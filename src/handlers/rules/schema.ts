@@ -1,8 +1,8 @@
 import z from "zod";
-import { TransactionType } from "../../schemas";
 import type { ColDef, ICellRendererParams } from "ag-grid-community";
 import { ButtonComponent } from "../../components/button";
 import { deleteRule } from "./api";
+import { TransactionCategory } from "../../schemas";
 
 export const Rule = z.object({
   id: z
@@ -10,7 +10,7 @@ export const Rule = z.object({
     .nullish()
     .transform((n) => n ?? crypto.randomUUID()),
   regex: z.string(),
-  transactionType: TransactionType,
+  transactionCategory: TransactionCategory,
 });
 
 export const Rules = z.array(Rule);
@@ -25,8 +25,8 @@ export const RULE_COLUMN_DEFINITIONS: ColDef<Rule>[] = [
     flex: 1,
   },
   {
-    field: "transactionType",
-    headerName: "Transaction Type",
+    field: "transactionCategory",
+    headerName: "Transaction Category",
     flex: 1,
   },
   {

@@ -1,17 +1,111 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="/src/style.css" rel="stylesheet" />
+    <title>transaction-log</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="/src/style.css" rel="stylesheet">
-  <title>transaction-log</title>
-</head>
+  <body>
+    <div id="app">
+      <div>
+        <h2>Credit Card Statements</h2>
 
-<body>
-  <div id="app">
-  </div>
-  <script type="module" src="/src/main.ts"></script>
-</body>
+        <div id="credit-card-statements">
+          <label class="file-label">
+            <span>Amex Transactions</span>
+            <input id="amex" type="file" />
+          </label>
 
+          <label class="file-label">
+            <span>Barclays Transactions</span>
+            <input id="barclay" type="file" />
+          </label>
+
+          <label class="file-label">
+            <span>Lloyds Transactions</span>
+            <input id="lloyds" type="file" />
+          </label>
+        </div>
+      </div>
+
+      <div>
+        <h2>Recurring Transactions</h2>
+        <div class="table-header">
+          <button class="action-btn">Add Transaction</button>
+        </div>
+        <div
+          id="recurring-transactions"
+          class="table ag-theme-custom-dark"
+        ></div>
+      </div>
+
+      <div>
+        <h2>Statement Rules</h2>
+        <div class="table-header">
+          <button id="add-statement-rule" class="action-btn">Add Rule</button>
+        </div>
+        <div id="statement-rules" class="table ag-theme-custom-dark"></div>
+      </div>
+      <div id="recurring-modal" class="modal hidden">
+        <div class="modal-content">
+          <h3>Add Recurring Transaction</h3>
+          <form id="recurring-form">
+            <label for="rec-date">Date</label>
+            <input type="date" id="rec-date" required />
+
+            <label for="rec-type">Transaction Type</label>
+            <select id="rec-type" required>
+              <option value="Amex">Amex</option>
+              <option value="Lloyds">Lloyds</option>
+              <option value="Barclays">Barclays</option>
+              <option value="Chase">Chase</option>
+              <option value="Current">Current</option>
+            </select>
+
+            <label for="rec-desc">Description</label>
+            <input type="text" id="rec-desc" required />
+
+            <label for="rec-card">Card Type</label>
+            <input type="text" id="rec-card" required />
+
+            <label for="rec-amount">Amount</label>
+            <input type="number" step="0.01" id="rec-amount" required />
+
+            <div class="modal-actions">
+              <button type="submit" class="action-btn">Add</button>
+              <button type="button" class="action-btn close-btn">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div id="rules-modal" class="modal hidden">
+        <div class="modal-content">
+          <h3>Add Statement Rule</h3>
+          <form id="rules-form">
+            <label for="rule-regex">Regex Lookup</label>
+            <input type="text" id="rule-regex" name="regex" required />
+
+            <label for="rule-type">Transaction Type</label>
+            <select name="transactionType" id="rec-type" required>
+              <option value="Amex">Amex</option>
+              <option value="Lloyds">Lloyds</option>
+              <option value="Barclays">Barclays</option>
+              <option value="Chase">Chase</option>
+              <option value="Current">Current</option>
+            </select>
+
+            <div class="modal-actions">
+              <button type="submit" class="action-btn">Add</button>
+              <button type="button" class="action-btn close-btn">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
 </html>

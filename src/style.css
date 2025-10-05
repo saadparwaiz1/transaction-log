@@ -1,3 +1,241 @@
-@import "tailwindcss";
+* {
+  box-sizing: border-box;
+  font-family: system-ui, sans-serif;
+}
 
-@custom-variant dark (&:where(.dark, .dark *));
+:root {
+  --bg: #f9f9f9;
+  --text: #111;
+  --card-bg: #fff;
+  --accent: #000;
+  --accent-hover: #222;
+  --border: #ccc;
+  --table-alt: #f2f2f2;
+  --table-hover: #e6e6e6;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #000;
+    --text: #f9f9f9;
+    --card-bg: #111;
+    --accent: #fff;
+    --accent-hover: #ccc;
+    --border: #333;
+    --table-alt: #1a1a1a;
+    --table-hover: #222;
+  }
+}
+
+.ag-theme-custom-dark {
+  --ag-background-color: #111;
+  --ag-foreground-color: #e8e9e8;
+  --ag-header-background-color: #000;
+  --ag-header-foreground-color: #fff;
+  --ag-row-hover-color: #222;
+  --ag-row-odd-background-color: #1a1a1a;
+  --ag-row-even-background-color: #111;
+  --ag-border-color: #333;
+  --ag-selected-row-background-color: #222;
+  --ag-header-cell-border-color: #333;
+  --ag-cell-border-color: #333;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+}
+
+#app {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 24px;
+  background: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+  font-size: 1.2rem;
+  margin-bottom: 16px;
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 4px;
+}
+
+.file-label {
+  display: inline-block;
+  margin: 10px 10px 0 0;
+}
+
+.file-label span {
+  display: inline-block;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--card-bg);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.file-label span:hover {
+  background: var(--accent-hover);
+  transform: scale(1.02);
+}
+
+.file-label input[type="file"] {
+  display: none;
+}
+
+.table {
+  width: 100%;
+  height: 300px;
+}
+
+
+.table-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 12px;
+}
+
+.action-btn {
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--card-bg);
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.action-btn:hover {
+  background: var(--accent-hover);
+  transform: scale(1.02);
+}
+
+.hidden {
+  display: none;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: var(--card-bg);
+  color: var(--text);
+  padding: 24px;
+  border-radius: 12px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.modal-content h3 {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.modal-content form label {
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+
+.modal-content form input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--card-bg);
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+
+.modal-content select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--card-bg);
+  color: var(--text);
+  font-size: 1rem;
+  margin-bottom: 10px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  transition: border 0.2s ease, background 0.2s ease;
+}
+
+.modal-content select:hover {
+  border-color: var(--accent);
+}
+
+.modal-content select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(0,0,0,0.1);
+}
+
+.modal-content select::-ms-expand {
+  display: none; 
+}
+
+.ag-theme-custom-dark .ag-root-wrapper,
+.ag-theme-custom-dark .ag-root {
+  background-color: var(--ag-background-color);
+  color: var(--ag-foreground-color);
+}
+
+.ag-theme-custom-dark .ag-header {
+  background-color: var(--ag-header-background-color);
+  color: var(--ag-header-foreground-color);
+}
+
+.ag-theme-custom-dark .ag-header-cell {
+  border-right: 1px solid var(--ag-header-cell-border-color);
+}
+
+.ag-theme-custom-dark .ag-cell {
+  border-right: 1px solid var(--ag-cell-border-color);
+  border-bottom: 1px solid var(--ag-cell-border-color);
+}
+
+.ag-theme-custom-dark .ag-row:hover {
+  background-color: var(--ag-row-hover-color);
+}
+
+.ag-theme-custom-dark .ag-row:nth-child(even) {
+  background-color: var(--ag-row-even-background-color);
+}
+
+.ag-theme-custom-dark .ag-row:nth-child(odd) {
+  background-color: var(--ag-row-odd-background-color);
+}
+
+.ag-theme-custom-dark .ag-row-selected {
+  background-color: var(--ag-selected-row-background-color) !important;
+}

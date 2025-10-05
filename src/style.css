@@ -25,9 +25,8 @@
     --table-alt: #1a1a1a;
     --table-hover: #222;
   }
-}
 
-.ag-theme-custom-dark {
+  .ag-theme-custom-dark {
   --ag-background-color: #111;
   --ag-foreground-color: #e8e9e8;
   --ag-header-background-color: #000;
@@ -40,6 +39,44 @@
   --ag-header-cell-border-color: #333;
   --ag-cell-border-color: #333;
 }
+
+.ag-theme-custom-dark .ag-root-wrapper,
+.ag-theme-custom-dark .ag-root {
+  background-color: var(--ag-background-color);
+  color: var(--ag-foreground-color);
+}
+
+.ag-theme-custom-dark .ag-header {
+  background-color: var(--ag-header-background-color);
+  color: var(--ag-header-foreground-color);
+}
+
+.ag-theme-custom-dark .ag-header-cell {
+  border-right: 1px solid var(--ag-header-cell-border-color);
+}
+
+.ag-theme-custom-dark .ag-cell {
+  border-right: 1px solid var(--ag-cell-border-color);
+  border-bottom: 1px solid var(--ag-cell-border-color);
+}
+
+.ag-theme-custom-dark .ag-row:hover {
+  background-color: var(--ag-row-hover-color);
+}
+
+.ag-theme-custom-dark .ag-row:nth-child(even) {
+  background-color: var(--ag-row-even-background-color);
+}
+
+.ag-theme-custom-dark .ag-row:nth-child(odd) {
+  background-color: var(--ag-row-odd-background-color);
+}
+
+.ag-theme-custom-dark .ag-row-selected {
+  background-color: var(--ag-selected-row-background-color) !important;
+}
+}
+
 
 body {
   margin: 0;
@@ -204,38 +241,3 @@ h2 {
   display: none; 
 }
 
-.ag-theme-custom-dark .ag-root-wrapper,
-.ag-theme-custom-dark .ag-root {
-  background-color: var(--ag-background-color);
-  color: var(--ag-foreground-color);
-}
-
-.ag-theme-custom-dark .ag-header {
-  background-color: var(--ag-header-background-color);
-  color: var(--ag-header-foreground-color);
-}
-
-.ag-theme-custom-dark .ag-header-cell {
-  border-right: 1px solid var(--ag-header-cell-border-color);
-}
-
-.ag-theme-custom-dark .ag-cell {
-  border-right: 1px solid var(--ag-cell-border-color);
-  border-bottom: 1px solid var(--ag-cell-border-color);
-}
-
-.ag-theme-custom-dark .ag-row:hover {
-  background-color: var(--ag-row-hover-color);
-}
-
-.ag-theme-custom-dark .ag-row:nth-child(even) {
-  background-color: var(--ag-row-even-background-color);
-}
-
-.ag-theme-custom-dark .ag-row:nth-child(odd) {
-  background-color: var(--ag-row-odd-background-color);
-}
-
-.ag-theme-custom-dark .ag-row-selected {
-  background-color: var(--ag-selected-row-background-color) !important;
-}

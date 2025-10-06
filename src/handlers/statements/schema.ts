@@ -1,8 +1,9 @@
 import z from "zod";
 import { type ColDef, type ICellRendererParams } from "ag-grid-community";
-import { addStatementFile, deleteStatement } from "./api";
-import { TransactionType } from "../../schemas";
+import { addStatementFile } from "./api";
+import { TransactionType } from "../../base/schemas";
 import { StatementActionRenderer } from "./renderer";
+import { remove } from "../../base/storage";
 
 export const Statement = z.object({
   id: z
@@ -16,6 +17,8 @@ export const Statements = z.array(Statement);
 
 export type Statement = z.infer<typeof Statement>;
 export type Statements = z.infer<typeof Statements>;
+
+export const STATEMENTS_STORAGE_KEY = "transactions::statements";
 
 export const STATEMENT_COLUMN_DEFINITIONS: ColDef<Statement>[] = [
   {
@@ -40,7 +43,7 @@ export const STATEMENT_COLUMN_DEFINITIONS: ColDef<Statement>[] = [
         element.click();
       },
       onDelete: (params: ICellRendererParams) => {
-        deleteStatement(params.value);
+        remove(STATEMENTS_STORAGE_KEY, params.value, Statement);
         params.api.applyTransaction({
           remove: [{ id: params.value }],
         });

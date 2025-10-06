@@ -1,8 +1,8 @@
 import z from "zod";
-import { TransactionType } from "../../schemas";
+import { TransactionType } from "../../base/schemas";
 import type { ColDef, ICellRendererParams } from "ag-grid-community";
 import { DefaultActionRendererComponent } from "../../components/renderer";
-import { deleteRecurring } from "./api";
+import { remove } from "../../base/storage";
 
 export const Recurring = z.object({
   id: z
@@ -19,9 +19,10 @@ export const Recurring = z.object({
 export const RecurringList = z.array(Recurring);
 
 export type Recurring = z.infer<typeof Recurring>;
-export type RecurringList = z.infer<typeof RecurringList>;
 
-export const STATEMENT_COLUMN_DEFINITIONS: ColDef<Recurring>[] = [
+export const RECURRING_STORAGE_KEY = "transactions::recurring";
+
+export const RECURRING_COLUMN_DEFINITIONS: ColDef<Recurring>[] = [
   {
     field: "description",
     headerName: "Transaction Description",
@@ -49,7 +50,7 @@ export const STATEMENT_COLUMN_DEFINITIONS: ColDef<Recurring>[] = [
     cellRenderer: DefaultActionRendererComponent,
     cellRendererParams: {
       onDelete: (params: ICellRendererParams) => {
-        deleteRecurring(params.value);
+        remove(RECURRING_STORAGE_KEY, params.value, Recurring);
         params.api.applyTransaction({
           remove: [{ id: params.value }],
         });

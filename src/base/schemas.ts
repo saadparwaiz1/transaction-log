@@ -1,5 +1,7 @@
 import z from "zod";
 
+export type ID = { id: string };
+
 export const TransactionType = z.enum([
   "Amex",
   "Lloyds",

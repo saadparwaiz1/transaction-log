@@ -1,8 +1,8 @@
 import z from "zod";
 import type { ColDef, ICellRendererParams } from "ag-grid-community";
 import { DefaultActionRendererComponent } from "../../components/renderer";
-import { deleteRule } from "./api";
-import { TransactionCategory } from "../../schemas";
+import { TransactionCategory } from "../../base/schemas";
+import { remove } from "../../base/storage";
 
 export const Rule = z.object({
   id: z
@@ -17,6 +17,8 @@ export const Rules = z.array(Rule);
 
 export type Rule = z.infer<typeof Rule>;
 export type Rules = z.infer<typeof Rules>;
+
+export const RULES_STORAGE_KEY = "transactions::rules";
 
 export const RULE_COLUMN_DEFINITIONS: ColDef<Rule>[] = [
   {
@@ -36,7 +38,7 @@ export const RULE_COLUMN_DEFINITIONS: ColDef<Rule>[] = [
     cellRenderer: DefaultActionRendererComponent,
     cellRendererParams: {
       onDelete: (params: ICellRendererParams) => {
-        deleteRule(params.value);
+        remove(RULES_STORAGE_KEY, params.value, Rule);
         params.api.applyTransaction({
           remove: [{ id: params.value }],
         });

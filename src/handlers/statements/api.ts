@@ -27,6 +27,6 @@ export function addStatementFile(id: string, file: File) {
   STATEMENT_FILE_CACHE.set(id, file);
 }
 
-export function getStatementFiles(id: string) {
+export function getStatementFile(id: string) {
   return STATEMENT_FILE_CACHE.get(id);
 }

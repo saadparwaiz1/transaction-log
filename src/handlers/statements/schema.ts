@@ -1,16 +1,8 @@
 import z from "zod";
-import {
-  inputStyleBase,
-  type ColDef,
-  type ICellRendererParams,
-} from "ag-grid-community";
+import { type ColDef, type ICellRendererParams } from "ag-grid-community";
 import { addStatementFile, deleteStatement } from "./api";
 import { TransactionType } from "../../schemas";
 import { StatementActionRenderer } from "./renderer";
-
-const FILE_HANDLER = document.getElementById(
-  "file-handler",
-) as HTMLInputElement;
 
 export const Statement = z.object({
   id: z

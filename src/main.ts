@@ -17,40 +17,23 @@ import {
   RECURRING_STORAGE_KEY,
 } from "./handlers/recurring/schema";
 import { findAll } from "./base/storage";
+import { getElementById } from "./base/utils";
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 
-const GenerateButton = document.getElementById(
-  "generate-button",
-) as HTMLButtonElement;
+const GenerateButton = getElementById<HTMLButtonElement>("generate-button");
 
-const RecurringTable = document.getElementById(
+const RecurringTable = getElementById<HTMLTableElement>(
   "recurring-transactions",
-) as HTMLTableElement;
-const RecurringAddButton = document.getElementById(
-  "add-transaction",
-) as HTMLButtonElement;
-const RecurringModal = document.getElementById(
-  "recurring-modal",
-) as HTMLDivElement;
-
-const RulesTable = document.getElementById(
-  "statement-rules",
-) as HTMLTableElement;
-const RulesAddButton = document.getElementById(
-  "add-statement-rule",
-) as HTMLButtonElement;
-const RulesModal = document.getElementById("rules-modal") as HTMLDivElement;
-
-const StatementsTable = document.getElementById(
-  "statements",
-) as HTMLTableElement;
-const StatementsAddButton = document.getElementById(
-  "add-statement",
-) as HTMLButtonElement;
-const StatementsModal = document.getElementById(
-  "statement-model",
-) as HTMLDivElement;
+);
+const RecurringAddButton = getElementById<HTMLButtonElement>("add-transaction");
+const RecurringModal = getElementById<HTMLDivElement>("recurring-modal");
+const RulesTable = getElementById<HTMLTableElement>("statement-rules");
+const RulesAddButton = getElementById<HTMLButtonElement>("add-statement-rule");
+const RulesModal = getElementById<HTMLDivElement>("rules-modal");
+const StatementsTable = getElementById<HTMLTableElement>("statements");
+const StatementsAddButton = getElementById<HTMLButtonElement>("add-statement");
+const StatementsModal = getElementById<HTMLDivElement>("statement-modal");
 
 setup(
   RECURRING_STORAGE_KEY,

@@ -5,7 +5,7 @@ type StatementActionRendererParams = ICellRendererParams & {
   onUpload: (params: ICellRendererParams) => void;
 };
 
-export class UploadButtonComponent {
+export class StatementActionRenderer {
   eGui!: HTMLDivElement;
   eventListener!: () => void;
 
@@ -13,13 +13,13 @@ export class UploadButtonComponent {
     this.eGui = document.createElement("div");
     const uploadButton = document.createElement("button");
     uploadButton.className = "action-btn";
-    uploadButton.disabled = true;
     uploadButton.textContent = "Upload";
+    uploadButton.onclick = () => params.onUpload(params);
     this.eGui.appendChild(uploadButton);
     const eButton = document.createElement("button");
     eButton.className = "action-btn";
     eButton.textContent = "Delete";
-    eButton.addEventListener("click", () => params.onDelete(params));
+    eButton.onclick = () => params.onDelete(params);
     this.eGui.appendChild(eButton);
   }
 

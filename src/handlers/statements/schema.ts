@@ -1,8 +1,16 @@
 import z from "zod";
-import type { ColDef, ICellRendererParams } from "ag-grid-community";
-import { deleteStatement } from "./api";
+import {
+  inputStyleBase,
+  type ColDef,
+  type ICellRendererParams,
+} from "ag-grid-community";
+import { addStatementFile, deleteStatement } from "./api";
 import { TransactionType } from "../../schemas";
-import { UploadButtonComponent } from "./renderer";
+import { StatementActionRenderer } from "./renderer";
+
+const FILE_HANDLER = document.getElementById(
+  "file-handler",
+) as HTMLInputElement;
 
 export const Statement = z.object({
   id: z
@@ -27,9 +35,19 @@ export const STATEMENT_COLUMN_DEFINITIONS: ColDef<Statement>[] = [
     field: "id",
     headerName: "Actions",
     flex: 1,
-    cellRenderer: UploadButtonComponent,
+    cellRenderer: StatementActionRenderer,
     cellRendererParams: {
-      onClick: (params: ICellRendererParams) => {
+      onUpload: async (params: ICellRendererParams) => {
+        const element = document.createElement("input");
+        element.type = "file";
+        element.onchange = () => {
+          if (element.files != null && element.files.length > 0) {
+            addStatementFile(params.value, element.files[0]);
+          }
+        };
+        element.click();
+      },
+      onDelete: (params: ICellRendererParams) => {
         deleteStatement(params.value);
         params.api.applyTransaction({
           remove: [{ id: params.value }],
